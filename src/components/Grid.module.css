@@ -1,0 +1,29 @@
+.div-table {
+  display: table;
+  width: auto;
+  background-color: #eee;
+  border: 1px solid #666666;
+}
+.div-table-row {
+  display: table-row;
+  width: auto;
+}
+.div-table-col {
+  float: left; /* fix for  buggy browsers */
+  display: table-column;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #666666;
+}
+.empty {
+  background-color: #fff;
+}
+.visited {
+  background-color: lightgray;
+}
+.obstacle {
+  background-color: aqua;
+}
+.current {
+  background-color: lightsalmon;
+}
