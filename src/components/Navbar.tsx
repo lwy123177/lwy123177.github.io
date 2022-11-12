@@ -14,13 +14,13 @@ const Navbar = () => {
     <AppBar position="static" color="secondary">
       <Toolbar variant="dense">
         <Link to="/">
-          <HomeIcon color={path == "/" ? "warning" : "primary"} />
+          <HomeIcon color={path === "/" ? "warning" : "primary"} />
         </Link>
         <Link to="/bfs">
-          <Button color={path == "/bfs" ? "warning" : "primary"}>BFS</Button>
+          <Button color={path === "/bfs" ? "warning" : "primary"}>BFS</Button>
         </Link>
         <Link to="/dfs">
-          <Button color={path == "/dfs" ? "warning" : "primary"}>DFS</Button>
+          <Button color={path === "/dfs" ? "warning" : "primary"}>DFS</Button>
         </Link>
       </Toolbar>
     </AppBar>
