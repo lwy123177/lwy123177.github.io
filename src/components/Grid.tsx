@@ -1,5 +1,5 @@
 import classes from "./Grid.module.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GridContext } from "../store/GridContext";
 import { Button } from "@mui/material";
 import { State } from "../store/GridContext";
@@ -22,6 +22,7 @@ const Grid: React.FC<{
 }> = (props) => {
   const gridContext = useContext(GridContext);
   const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
+  const [visible, setIsVisible] = useState<boolean>(false);
   const drawPathHandler = () => {
     // TODO: use some algorithm (bfs/dfs) to find the path here
     gridContext.nextTurn();
@@ -54,8 +55,11 @@ const Grid: React.FC<{
     if (gridContext.state !== "Obstacle") return;
     gridContext.markCell(row, col, gridContext.state.toLowerCase());
   };
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
   return (
-    <>
+    <div className={visible ? classes.fadeIn : classes.fadeOut}>
       <div className={classes["label-row"]}>
         <Label name={"Obstacle"} />
         <Label name={"Empty"} />
@@ -82,7 +86,7 @@ const Grid: React.FC<{
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 export default Grid;
