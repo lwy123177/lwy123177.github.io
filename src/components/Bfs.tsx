@@ -6,7 +6,7 @@ const Bfs = () => {
   const gridContext = useContext(GridContext);
   return (
     <div>
-      Breadth-first Search (BFS)
+      <h2>Breadth-first Search (BFS)</h2>
       <Grid grid={gridContext.grid} />
     </div>
   );

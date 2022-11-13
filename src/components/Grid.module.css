@@ -27,3 +27,12 @@
 .current {
   background-color: lightsalmon;
 }
+.destination {
+  background-color: lightgreen;
+}
+.label-row {
+  display: flex;
+}
+.label-col {
+  margin-right: 5px;
+}

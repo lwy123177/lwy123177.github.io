@@ -6,7 +6,7 @@ const Dfs = () => {
   const gridContext = useContext(GridContext);
   return (
     <div>
-      Depth-first Search (DFS)
+      <h2>Depth-first Search (DFS)</h2>
       <Grid grid={gridContext.grid} />
     </div>
   );
