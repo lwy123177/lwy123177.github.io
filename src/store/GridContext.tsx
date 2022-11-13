@@ -3,11 +3,10 @@ import React, { useState } from "react";
 const h = 40;
 const w = 50;
 
-type State =
+export type State =
   | "Start"
   | "Destination"
   | "Obstacle"
-  | "ReadyToDraw"
   | "Drawing"
   | "FinishedDrawing";
 
@@ -53,8 +52,7 @@ export const GridContextProvider: React.FC<{ children: React.ReactNode }> = (
     setSelecting((prevState) => {
       if (prevState === "Start") return "Destination";
       if (prevState === "Destination") return "Obstacle";
-      if (prevState === "Obstacle") return "ReadyToDraw";
-      if (prevState === "ReadyToDraw") return "Drawing";
+      if (prevState === "Obstacle") return "Drawing";
       if (prevState === "Drawing") return "FinishedDrawing";
       // if (prevState === "FinishedDrawing")
       return "Start";
