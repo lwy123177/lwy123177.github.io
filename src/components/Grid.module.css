@@ -28,7 +28,8 @@
 .obstacle {
   background-color: aqua;
 }
-.current {
+.current,
+.start {
   background-color: lightsalmon;
 }
 .destination {
