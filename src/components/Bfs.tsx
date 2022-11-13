@@ -1,23 +1,13 @@
-import { useState } from "react";
 import Grid from "./Grid";
-
-const h = 40;
-const w = 50;
+import { useContext } from "react";
+import { GridContext } from "../store/GridContext";
 
 const Bfs = () => {
-  let startGrid: string[][] = [];
-  for (let i = 0; i < h; i++) {
-    let row: string[] = [];
-    for (let j = 0; j < w; j++) {
-      row.push("empty");
-    }
-    startGrid.push(row);
-  }
-  const [grid, setGrid] = useState<string[][]>(startGrid);
+  const gridContext = useContext(GridContext);
   return (
     <div>
       BFS page
-      <Grid grid={grid} />
+      <Grid grid={gridContext.grid} />
     </div>
   );
 };
