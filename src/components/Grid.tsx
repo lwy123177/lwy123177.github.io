@@ -1,5 +1,5 @@
 import classes from "./Grid.module.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { GridContext } from "../store/GridContext";
 import { Button } from "@mui/material";
 import { State } from "../store/GridContext";
@@ -21,6 +21,7 @@ const Grid: React.FC<{
   grid: string[][];
 }> = (props) => {
   const gridContext = useContext(GridContext);
+  const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
   const drawPathHandler = () => {
     // TODO: use some algorithm (bfs/dfs) to find the path here
     gridContext.nextTurn();
@@ -41,8 +42,17 @@ const Grid: React.FC<{
   };
   const cellClickHandler = (row: number, col: number) => {
     gridContext.markCell(row, col, gridContext.state.toLowerCase());
-    if (gridContext.state === "Start" || gridContext.state === "Destination")
+    if (gridContext.state === "Start" || gridContext.state === "Destination") {
       gridContext.nextTurn();
+    }
+  };
+  const cellOverHandler = (row: number, col: number) => {
+    if (gridContext.state !== "Obstacle" || !isMouseDown) return;
+    gridContext.markCell(row, col, gridContext.state.toLowerCase());
+  };
+  const cellDownHandler = (row: number, col: number) => {
+    if (gridContext.state !== "Obstacle") return;
+    gridContext.markCell(row, col, gridContext.state.toLowerCase());
   };
   return (
     <>
@@ -53,7 +63,11 @@ const Grid: React.FC<{
         <Label name={"Destination"} />
       </div>
       {getInstruction(gridContext.state)}
-      <div className={classes["div-table"]}>
+      <div
+        className={classes["div-table"]}
+        onMouseDown={() => setIsMouseDown(true)}
+        onMouseUp={() => setIsMouseDown(false)}
+      >
         {props.grid.map((row, rowIndex) => (
           <div key={"row_" + rowIndex} className={classes["div-table-row"]}>
             {row.map((cell, colIndex) => (
@@ -61,6 +75,8 @@ const Grid: React.FC<{
                 key={"cell_" + rowIndex + "," + colIndex}
                 className={`${classes["div-table-col"]} ${classes[cell]}`}
                 onClick={() => cellClickHandler(rowIndex, colIndex)}
+                onMouseOver={() => cellOverHandler(rowIndex, colIndex)}
+                onMouseDown={() => cellDownHandler(rowIndex, colIndex)}
               />
             ))}
           </div>
