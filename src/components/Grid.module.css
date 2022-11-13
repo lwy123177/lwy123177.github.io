@@ -30,14 +30,14 @@
   background-color: lightgray;
 }
 .obstacle {
-  background-color: aqua;
+  background-color: darkmagenta;
 }
 .current,
 .start {
   background-color: lightsalmon;
 }
 .destination {
-  background-color: lightgreen;
+  background-color: greenyellow;
 }
 .label-row {
   display: flex;
