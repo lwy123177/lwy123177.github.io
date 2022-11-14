@@ -12,7 +12,7 @@ export type State =
 
 type GridContextObj = {
   grid: string[][];
-  markCell: (row: number, col: number, val: string) => void;
+  markCell: (row: number, col: number, val: string) => boolean;
   state: State;
   nextTurn: () => void;
 };
@@ -28,7 +28,7 @@ for (let i = 0; i < h; i++) {
 
 export const GridContext = React.createContext<GridContextObj>({
   grid: startGrid,
-  markCell: (row: number, col: number, val: string) => {},
+  markCell: (row: number, col: number, val: string) => true,
   state: "Start",
   nextTurn: () => {},
 });
@@ -38,7 +38,11 @@ export const GridContextProvider: React.FC<{ children: React.ReactNode }> = (
 ) => {
   const [grid, setGrid] = useState<string[][]>(startGrid);
   const [state, setSelecting] = useState<State>("Start");
+  const out = (row: number, col: number) => {
+    return row < 0 || col < 0 || row >= grid.length || col >= grid[0].length;
+  };
   const markCell = (row: number, col: number, val: string) => {
+    if (out(row, col) || grid[row][col] != "empty") return false;
     setGrid((prevState) => {
       let cloneGrid: string[][] = [];
       for (let i = 0; i < prevState.length; i++) {
@@ -47,6 +51,7 @@ export const GridContextProvider: React.FC<{ children: React.ReactNode }> = (
       cloneGrid[row][col] = val;
       return cloneGrid;
     });
+    return true;
   };
   const nextTurn = () => {
     setSelecting((prevState) => {

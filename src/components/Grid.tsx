@@ -42,8 +42,15 @@ const Grid: React.FC<{
     if (state === "Drawing") return <h3>Finding the path...</h3>;
   };
   const cellClickHandler = (row: number, col: number) => {
-    gridContext.markCell(row, col, gridContext.state.toLowerCase());
-    if (gridContext.state === "Start" || gridContext.state === "Destination") {
+    let success = gridContext.markCell(
+      row,
+      col,
+      gridContext.state.toLowerCase()
+    );
+    if (
+      success &&
+      (gridContext.state === "Start" || gridContext.state === "Destination")
+    ) {
       gridContext.nextTurn();
     }
   };
