@@ -52,11 +52,12 @@ const Grid: React.FC<{
       col,
       gridContext.state.toLowerCase()
     );
-    if (
-      success &&
-      (gridContext.state === "Start" || gridContext.state === "Destination")
-    ) {
-      gridContext.nextTurn();
+    if (success) {
+      if (gridContext.state === "Start") {
+        gridContext.setState("Destination");
+      } else if (gridContext.state === "Destination") {
+        gridContext.setState("Obstacle");
+      }
     }
   };
   const cellOverHandler = (row: number, col: number) => {

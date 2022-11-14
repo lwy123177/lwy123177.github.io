@@ -2,15 +2,16 @@ import Grid from "./Grid";
 import { useContext } from "react";
 import { GridContext } from "../store/GridContext";
 import classes from "./Bfs.module.css";
+import { State } from "../store/GridContext";
 
 const Bfs = () => {
   const gridContext = useContext(GridContext);
   const search = () => {
     // Start Searching
-    gridContext.nextTurn();
+    gridContext.setState("Drawing");
 
     // Finish Searching
-    // gridContext.nextTurn();
+    // gridContext.setState("FinishedDrawing");
   };
   return (
     <div className={classes["bfs-page"]}>

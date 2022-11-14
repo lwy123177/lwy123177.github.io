@@ -14,7 +14,7 @@ type GridContextObj = {
   grid: string[][];
   markCell: (row: number, col: number, val: string) => boolean;
   state: State;
-  nextTurn: () => void;
+  setState: (state: State) => void;
 };
 
 let startGrid: string[][] = [];
@@ -30,14 +30,14 @@ export const GridContext = React.createContext<GridContextObj>({
   grid: startGrid,
   markCell: (row: number, col: number, val: string) => true,
   state: "Start",
-  nextTurn: () => {},
+  setState: (state: State) => {},
 });
 
 export const GridContextProvider: React.FC<{ children: React.ReactNode }> = (
   props
 ) => {
   const [grid, setGrid] = useState<string[][]>(startGrid);
-  const [state, setSelecting] = useState<State>("Start");
+  const [state, setState] = useState<State>("Start");
   const out = (row: number, col: number) => {
     return row < 0 || col < 0 || row >= grid.length || col >= grid[0].length;
   };
@@ -53,21 +53,11 @@ export const GridContextProvider: React.FC<{ children: React.ReactNode }> = (
     });
     return true;
   };
-  const nextTurn = () => {
-    setSelecting((prevState) => {
-      if (prevState === "Start") return "Destination";
-      if (prevState === "Destination") return "Obstacle";
-      if (prevState === "Obstacle") return "Drawing";
-      if (prevState === "Drawing") return "FinishedDrawing";
-      // if (prevState === "FinishedDrawing")
-      return "Start";
-    });
-  };
   const contextValue = {
     grid: grid,
     markCell: markCell,
     state: state,
-    nextTurn: nextTurn,
+    setState: setState,
   };
   return (
     <GridContext.Provider value={contextValue}>
