@@ -1,6 +1,8 @@
 .tab {
-  transition: all 1s ease-in-out;
+  transition: 0.5s;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 .tab:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
