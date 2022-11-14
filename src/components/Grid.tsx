@@ -19,6 +19,7 @@ const Label: React.FC<{ name: string }> = (props) => {
 
 const Grid: React.FC<{
   grid: string[][];
+  search: () => void;
 }> = (props) => {
   const gridContext = useContext(GridContext);
   const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
