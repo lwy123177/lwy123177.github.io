@@ -20,7 +20,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className={classes.tab}>
-          <Link to="/bfs">
+          <Link to="/bfs" style={{ textDecoration: "none" }}>
             <Button
               color={path === "/bfs" ? "warning" : "primary"}
               className={classes.tab}
@@ -31,7 +31,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className={classes.tab}>
-          <Link to="/dfs">
+          <Link to="/dfs" style={{ textDecoration: "none" }}>
             <Button
               color={path === "/dfs" ? "warning" : "primary"}
               className={classes.tab}
