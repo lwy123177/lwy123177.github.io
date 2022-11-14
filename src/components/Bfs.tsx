@@ -52,7 +52,11 @@ const Bfs = () => {
         for (let di = 0; di < 4; di++) {
           let dr = popped[0] + dirs[di][0],
             dc = popped[1] + dirs[di][1];
-          if (!gridContext.out(dr, dc) && !vis.has(dr + "," + dc)) {
+          if (
+            !gridContext.out(dr, dc) &&
+            !vis.has(dr + "," + dc) &&
+            gridContext.grid[dr][dc] !== "obstacle"
+          ) {
             gridContext.markCell(popped[0], popped[1], "visited");
             vis.add(dr + "," + dc);
             queue.push([dr, dc]);
