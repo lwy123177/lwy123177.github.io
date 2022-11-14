@@ -15,6 +15,7 @@ type GridContextObj = {
   markCell: (row: number, col: number, val: string) => boolean;
   state: State;
   setState: (state: State) => void;
+  out: (row: number, col: number) => boolean;
 };
 
 let startGrid: string[][] = [];
@@ -31,6 +32,7 @@ export const GridContext = React.createContext<GridContextObj>({
   markCell: (row: number, col: number, val: string) => true,
   state: "Start",
   setState: (state: State) => {},
+  out: (row: number, col: number) => true,
 });
 
 export const GridContextProvider: React.FC<{ children: React.ReactNode }> = (
@@ -58,6 +60,7 @@ export const GridContextProvider: React.FC<{ children: React.ReactNode }> = (
     markCell: markCell,
     state: state,
     setState: setState,
+    out: out,
   };
   return (
     <GridContext.Provider value={contextValue}>
