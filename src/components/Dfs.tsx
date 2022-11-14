@@ -1,6 +1,7 @@
 import Grid from "./Grid";
 import { useContext } from "react";
 import { GridContext } from "../store/GridContext";
+import classes from "./Dfs.module.css";
 
 const Dfs = () => {
   const gridContext = useContext(GridContext);
@@ -8,7 +9,7 @@ const Dfs = () => {
     // TODO: Implement DFS here
   };
   return (
-    <div>
+    <div className={classes["dfs-page"]}>
       <h2>Depth-first Search (DFS)</h2>
       <Grid grid={gridContext.grid} search={search} />
     </div>
