@@ -2,7 +2,6 @@ import Grid from "./Grid";
 import { useContext } from "react";
 import { GridContext } from "../store/GridContext";
 import classes from "./Bfs.module.css";
-import { State } from "../store/GridContext";
 
 const Bfs = () => {
   const gridContext = useContext(GridContext);
@@ -63,6 +62,7 @@ const Bfs = () => {
           }
           await delay(5);
         }
+        gridContext.markCell(popped[0], popped[1], "visited");
       }
     }
     // Finish Searching
