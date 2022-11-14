@@ -24,23 +24,27 @@ const Grid: React.FC<{
   const gridContext = useContext(GridContext);
   const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
   const [visible, setIsVisible] = useState<boolean>(false);
-  const drawPathHandler = () => {
-    // TODO: use some algorithm (bfs/dfs) to find the path here
-    gridContext.nextTurn();
-  };
   const getInstruction = (state: State) => {
     if (state === "Start") return <h3>Please select a starting position</h3>;
     if (state === "Destination") return <h3>Please select a destination</h3>;
     if (state === "Obstacle")
       return (
         <div className={classes["label-row"]}>
-          <h3>Please select obstacle(s)</h3>
-          <Button variant="outlined" onClick={drawPathHandler}>
+          <h3>Please select obstacle(s): </h3>
+          <Button variant="outlined" onClick={props.search}>
             Draw!
           </Button>
         </div>
       );
     if (state === "Drawing") return <h3>Finding the path...</h3>;
+    if (state === "FinishedDrawing")
+      return (
+        <div className={classes["label-row"]}>
+          <h3>Done: </h3>
+          <Button variant="outlined">Draw Again</Button>
+          <Button variant="outlined">Restart</Button>
+        </div>
+      );
   };
   const cellClickHandler = (row: number, col: number) => {
     let success = gridContext.markCell(

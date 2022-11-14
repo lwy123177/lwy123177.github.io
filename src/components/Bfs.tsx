@@ -6,7 +6,11 @@ import classes from "./Bfs.module.css";
 const Bfs = () => {
   const gridContext = useContext(GridContext);
   const search = () => {
-    // TODO: Implement BFS here
+    // Start Searching
+    gridContext.nextTurn();
+
+    // Finish Searching
+    // gridContext.nextTurn();
   };
   return (
     <div className={classes["bfs-page"]}>
