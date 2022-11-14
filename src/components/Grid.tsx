@@ -72,6 +72,7 @@ const Grid: React.FC<{
         <Label name={"Empty"} />
         <Label name={"Current"} />
         <Label name={"Destination"} />
+        <Label name={"Visited"} />
       </div>
       {getInstruction(gridContext.state)}
       <div
