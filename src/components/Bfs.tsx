@@ -66,7 +66,7 @@ const Bfs = () => {
       }
     }
     // Finish Searching
-    // gridContext.setState("FinishedDrawing");
+    gridContext.setState("FinishedDrawing");
   };
   return (
     <div className={classes["bfs-page"]}>

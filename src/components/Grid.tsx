@@ -24,6 +24,25 @@ const Grid: React.FC<{
   const gridContext = useContext(GridContext);
   const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
   const [visible, setIsVisible] = useState<boolean>(false);
+  const handleDrawAgain = () => {
+    for (let r = 0; r < gridContext.grid.length; r++) {
+      for (let c = 0; c < gridContext.grid[0].length; c++) {
+        if (gridContext.grid[r][c] === "visited") {
+          gridContext.grid[r][c] = "empty";
+        }
+      }
+    }
+    gridContext.setState("Drawing");
+    props.search();
+  };
+  const handleRestart = () => {
+    for (let r = 0; r < gridContext.grid.length; r++) {
+      for (let c = 0; c < gridContext.grid[0].length; c++) {
+        gridContext.grid[r][c] = "empty";
+      }
+    }
+    gridContext.setState("Start");
+  };
   const getInstruction = (state: State) => {
     if (state === "Start") return <h3>Please select a starting position</h3>;
     if (state === "Destination") return <h3>Please select a destination</h3>;
@@ -36,13 +55,19 @@ const Grid: React.FC<{
           </Button>
         </div>
       );
-    if (state === "Drawing") return <h3>Finding the path...</h3>;
+    if (state === "Drawing") {
+      return <h3>Finding the path...</h3>;
+    }
     if (state === "FinishedDrawing")
       return (
         <div className={classes["label-row"]}>
           <h3>Done: </h3>
-          <Button variant="outlined">Draw Again</Button>
-          <Button variant="outlined">Restart</Button>
+          <Button variant="outlined" onClick={handleDrawAgain}>
+            Draw Again
+          </Button>
+          <Button variant="outlined" onClick={handleRestart}>
+            Restart
+          </Button>
         </div>
       );
   };
