@@ -1,5 +1,5 @@
 import classes from "./Grid.module.css";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { GridContext } from "../store/GridContext";
 import { Button } from "@mui/material";
 import { State } from "../store/GridContext";
