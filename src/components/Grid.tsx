@@ -127,7 +127,11 @@ const Grid: React.FC<{
             {row.map((cell, colIndex) => (
               <div
                 key={"cell_" + rowIndex + "," + colIndex}
-                className={`${classes["div-table-col"]} ${classes[cell]}`}
+                className={`${classes["div-table-col"]} ${classes[cell]} ${
+                  cell === "path" && gridContext.state === "FinishedDrawing"
+                    ? classes["bump-path"]
+                    : ""
+                }`}
                 onClick={() => cellClickHandler(rowIndex, colIndex)}
                 onMouseOver={() => cellOverHandler(rowIndex, colIndex)}
                 onMouseDown={() => cellDownHandler(rowIndex, colIndex)}
