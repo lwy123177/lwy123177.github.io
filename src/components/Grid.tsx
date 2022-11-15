@@ -102,11 +102,11 @@ const Grid: React.FC<{
   return (
     <div className={visible ? classes.fadeIn : classes.fadeOut}>
       <div className={classes["label-row"]}>
-        <Label name={"Obstacle"} />
         <Label name={"Empty"} />
         <Label name={"Start"} />
-        <Label name={"Current"} />
         <Label name={"Destination"} />
+        <Label name={"Obstacle"} />
+        <Label name={"Current"} />
         <Label name={"Visited"} />
         <Label name={"Exploring"} />
       </div>
