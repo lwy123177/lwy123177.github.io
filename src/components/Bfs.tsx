@@ -9,6 +9,8 @@ const Bfs = () => {
   const delay = (delayInms: number) => {
     return new Promise((resolve) => setTimeout(resolve, delayInms));
   };
+  const getAnimationDelay = () => 500 - parseInt(speedRef.current!.value);
+  const encode = (row: number, col: number) => row + "," + col;
   const search = async () => {
     // Start Searching
     gridContext.setState("Drawing");
@@ -38,7 +40,8 @@ const Bfs = () => {
     }
     queue.push([startR, startC]);
     const vis = new Set<string>();
-    vis.add(startR + "," + startC);
+    const parent: Record<string, string> = {};
+    vis.add(encode(startR, startC));
     let found = false;
     while (!found && queue.length > 0) {
       let sz = queue.length;
@@ -50,14 +53,15 @@ const Bfs = () => {
         }
         gridContext.markCell(popped[0], popped[1], "current");
         for (let di = 0; di < 4; di++) {
-          let dr = popped[0] + dirs[di][0],
+          const dr = popped[0] + dirs[di][0],
             dc = popped[1] + dirs[di][1];
           if (
             !gridContext.out(dr, dc) &&
-            !vis.has(dr + "," + dc) &&
+            !vis.has(encode(dr, dc)) &&
             gridContext.grid[dr][dc] !== "obstacle"
           ) {
             gridContext.markCell(dr, dc, "exploring");
+            parent[encode(dr, dc)] = encode(popped[0], popped[1]);
           }
         }
         for (let di = 0; di < 4; di++) {
@@ -65,16 +69,28 @@ const Bfs = () => {
             dc = popped[1] + dirs[di][1];
           if (
             !gridContext.out(dr, dc) &&
-            !vis.has(dr + "," + dc) &&
+            !vis.has(encode(dr, dc)) &&
             gridContext.grid[dr][dc] !== "obstacle"
           ) {
-            vis.add(dr + "," + dc);
+            vis.add(encode(dr, dc));
             queue.push([dr, dc]);
           }
-          const d = 500 - parseInt(speedRef.current!.value);
-          await delay(d);
+          await delay(getAnimationDelay());
         }
         gridContext.markCell(popped[0], popped[1], "visited");
+      }
+    }
+    if (found) {
+      let cells: [number, number][] = [];
+      let now = encode(destR, destC);
+      while (now && parent[now]) {
+        let points = now.split(",").map((x) => parseInt(x));
+        cells.push([points[0], points[1]]);
+        now = parent[now];
+      }
+      for (let i = cells.length - 1; i >= 1; i--) {
+        gridContext.markCell(cells[i][0], cells[i][1], "path");
+        await delay(getAnimationDelay());
       }
     }
     // Finish Searching

@@ -44,6 +44,9 @@
 .exploring {
   background-color: aqua;
 }
+.path {
+  background-color: black;
+}
 .label-row {
   display: flex;
 }

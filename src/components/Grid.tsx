@@ -29,7 +29,8 @@ const Grid: React.FC<{
       for (let c = 0; c < gridContext.grid[0].length; c++) {
         if (
           gridContext.grid[r][c] === "visited" ||
-          gridContext.grid[r][c] === "exploring"
+          gridContext.grid[r][c] === "exploring" ||
+          gridContext.grid[r][c] === "path"
         ) {
           gridContext.grid[r][c] = "empty";
         }
