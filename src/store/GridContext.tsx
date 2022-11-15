@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const h = 40;
 const w = 50;
@@ -40,11 +40,17 @@ export const GridContextProvider: React.FC<{ children: React.ReactNode }> = (
 ) => {
   const [grid, setGrid] = useState<string[][]>(startGrid);
   const [state, setState] = useState<State>("Start");
+  const [obstacles, setObstacles] = useState<[number, number][]>([]);
   const out = (row: number, col: number) => {
     return row < 0 || col < 0 || row >= grid.length || col >= grid[0].length;
   };
   const markCell = (row: number, col: number, val: string) => {
-    if (out(row, col) || grid[row][col] != "empty") return false;
+    if (
+      out(row, col) ||
+      (grid[row][col] !== "obstacle" && grid[row][col] !== "empty") ||
+      (grid[row][col] === "obstacle" && val !== "empty")
+    )
+      return false;
     setGrid((prevState) => {
       let cloneGrid: string[][] = [];
       for (let i = 0; i < prevState.length; i++) {
@@ -53,7 +59,16 @@ export const GridContextProvider: React.FC<{ children: React.ReactNode }> = (
       cloneGrid[row][col] = val;
       return cloneGrid;
     });
+    if (val === "obstacle") {
+      setObstacles((prevState) => [...prevState, [row, col]]);
+    }
     return true;
+  };
+  const undo = () => {
+    if (state !== "Obstacle" || obstacles.length === 0) return;
+    let popped = obstacles[obstacles.length - 1]!;
+    markCell(popped[0], popped[1], "empty");
+    setObstacles((prevState) => prevState.slice(0, -1));
   };
   const contextValue = {
     grid: grid,
@@ -62,6 +77,20 @@ export const GridContextProvider: React.FC<{ children: React.ReactNode }> = (
     setState: setState,
     out: out,
   };
+  const keyDownHandler = (event: KeyboardEvent) => {
+    const { key } = event;
+    let isCtrlKey = event.ctrlKey || event.metaKey;
+    let isZ = key.toLowerCase() === "z";
+    if (isCtrlKey && isZ) {
+      undo();
+      event.preventDefault();
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("keydown", keyDownHandler);
+    return () => window.removeEventListener("keydown", keyDownHandler);
+  }, [obstacles, state]);
+
   return (
     <GridContext.Provider value={contextValue}>
       {props.children}

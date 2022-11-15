@@ -1,5 +1,5 @@
 import classes from "./Grid.module.css";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GridContext } from "../store/GridContext";
 import { Button } from "@mui/material";
 import { State } from "../store/GridContext";
@@ -53,7 +53,10 @@ const Grid: React.FC<{
     if (state === "Obstacle")
       return (
         <div className={classes["label-row"]}>
-          <h3>Please select obstacle(s): </h3>
+          <h3>
+            Please select obstacle(s){" "}
+            <label className={classes.hint}>(Ctrl-Z to undo)</label>
+          </h3>
           <Button variant="outlined" onClick={props.search}>
             Draw!
           </Button>
