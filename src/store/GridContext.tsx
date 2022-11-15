@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-const h = 40;
-const w = 50;
+const h = 30;
+const w = 30;
 
 export type State =
   | "Start"
