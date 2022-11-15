@@ -2,6 +2,7 @@ import Grid from "./Grid";
 import { useContext, useRef } from "react";
 import { GridContext } from "../store/GridContext";
 import classes from "./Dfs.module.css";
+import utils from "../util/Util.module.css";
 
 const Dfs = () => {
   const gridContext = useContext(GridContext);
@@ -96,9 +97,9 @@ const Dfs = () => {
     <div className={classes["dfs-page"]}>
       <h2>Depth-first Search (DFS)</h2>
       <div
-        className={`${gridContext.state === "Drawing" ? classes.visible : ""}
-                    ${gridContext.state === "Drawing" ? classes.blink : ""}
-                    ${gridContext.state !== "Drawing" ? classes.hidden : ""}
+        className={`${gridContext.state === "Drawing" ? utils.visible : ""}
+                    ${gridContext.state === "Drawing" ? utils.blink : ""}
+                    ${gridContext.state !== "Drawing" ? utils.hidden : ""}
         `}
       >
         Animation Speed <input type="range" min="1" max="499" ref={speedRef} />
