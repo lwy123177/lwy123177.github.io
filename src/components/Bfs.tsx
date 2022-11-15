@@ -89,7 +89,14 @@ const Bfs = () => {
   return (
     <div className={classes["bfs-page"]}>
       <h2>Breadth-first Search (BFS)</h2>
-      Animation Speed <input type="range" min="1" max="499" ref={speedRef} />
+      <div
+        className={`${gridContext.state === "Drawing" ? classes.visible : ""}
+                    ${gridContext.state === "Drawing" ? classes.blink : ""}
+                    ${gridContext.state !== "Drawing" ? classes.hidden : ""}
+        `}
+      >
+        Animation Speed <input type="range" min="1" max="499" ref={speedRef} />
+      </div>
       <Grid search={search} />
     </div>
   );

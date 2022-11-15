@@ -1,3 +1,23 @@
 .bfs-page {
   padding-left: 20px;
 }
+.hidden {
+  visibility: hidden;
+}
+.visible {
+  visibility: visible;
+}
+.blink {
+  animation: blink 0.5s linear 2;
+}
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
