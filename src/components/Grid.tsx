@@ -27,7 +27,10 @@ const Grid: React.FC<{
   const handleDrawAgain = () => {
     for (let r = 0; r < gridContext.grid.length; r++) {
       for (let c = 0; c < gridContext.grid[0].length; c++) {
-        if (gridContext.grid[r][c] === "visited") {
+        if (
+          gridContext.grid[r][c] === "visited" ||
+          gridContext.grid[r][c] === "exploring"
+        ) {
           gridContext.grid[r][c] = "empty";
         }
       }
