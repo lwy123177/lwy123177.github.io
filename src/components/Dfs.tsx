@@ -96,12 +96,7 @@ const Dfs = () => {
   return (
     <div className={classes["dfs-page"]}>
       <h2>Depth-first Search (DFS)</h2>
-      <div
-        className={`${gridContext.state === "Drawing" ? utils.visible : ""}
-                    ${gridContext.state === "Drawing" ? utils.blink : ""}
-                    ${gridContext.state !== "Drawing" ? utils.hidden : ""}
-        `}
-      >
+      <div className={gridContext.state === "Drawing" ? utils.blink : ""}>
         Animation Speed <input type="range" min="1" max="499" ref={speedRef} />
       </div>
       <Grid search={search} />
