@@ -25,7 +25,6 @@ const Label: React.FC<{ name: string }> = (props) => {
 };
 
 const Grid: React.FC<{
-  grid: string[][];
   search: () => void;
 }> = (props) => {
   const gridContext = useContext(GridContext);
@@ -123,7 +122,7 @@ const Grid: React.FC<{
         onMouseDown={() => setIsMouseDown(true)}
         onMouseUp={() => setIsMouseDown(false)}
       >
-        {props.grid.map((row, rowIndex) => (
+        {gridContext.grid.map((row, rowIndex) => (
           <div key={"row_" + rowIndex} className={classes["div-table-row"]}>
             {row.map((cell, colIndex) => (
               <div

@@ -90,7 +90,7 @@ const Bfs = () => {
     <div className={classes["bfs-page"]}>
       <h2>Breadth-first Search (BFS)</h2>
       Animation Speed <input type="range" min="1" max="499" ref={speedRef} />
-      <Grid grid={gridContext.grid} search={search} />
+      <Grid search={search} />
     </div>
   );
 };
