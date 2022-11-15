@@ -1,10 +1,11 @@
 import Grid from "./Grid";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { GridContext } from "../store/GridContext";
 import classes from "./Bfs.module.css";
 
 const Bfs = () => {
   const gridContext = useContext(GridContext);
+  const speedRef = useRef<HTMLInputElement>(null);
   const delay = (delayInms: number) => {
     return new Promise((resolve) => setTimeout(resolve, delayInms));
   };
@@ -60,7 +61,8 @@ const Bfs = () => {
             vis.add(dr + "," + dc);
             queue.push([dr, dc]);
           }
-          await delay(5);
+          const d = 500 - parseInt(speedRef.current!.value);
+          await delay(d);
         }
         gridContext.markCell(popped[0], popped[1], "visited");
       }
@@ -71,6 +73,7 @@ const Bfs = () => {
   return (
     <div className={classes["bfs-page"]}>
       <h2>Breadth-first Search (BFS)</h2>
+      Animation Speed <input type="range" min="1" max="499" ref={speedRef} />
       <Grid grid={gridContext.grid} search={search} />
     </div>
   );
