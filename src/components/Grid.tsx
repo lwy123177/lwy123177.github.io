@@ -5,8 +5,15 @@ import { Button } from "@mui/material";
 import { State } from "../store/GridContext";
 
 const Label: React.FC<{ name: string }> = (props) => {
+  const gridContext = useContext(GridContext);
   return (
-    <div>
+    <div
+      className={
+        props.name.toLowerCase() === gridContext.state.toLowerCase()
+          ? classes.bump
+          : ""
+      }
+    >
       <div
         className={`${classes["div-table-col"]} 
         ${classes[props.name.toLowerCase()]}
@@ -23,7 +30,6 @@ const Grid: React.FC<{
 }> = (props) => {
   const gridContext = useContext(GridContext);
   const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
-  const [visible, setIsVisible] = useState<boolean>(false);
   const handleDrawAgain = () => {
     for (let r = 0; r < gridContext.grid.length; r++) {
       for (let c = 0; c < gridContext.grid[0].length; c++) {
@@ -100,11 +106,8 @@ const Grid: React.FC<{
     if (gridContext.state !== "Obstacle") return;
     gridContext.markCell(row, col, gridContext.state.toLowerCase());
   };
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
   return (
-    <div className={visible ? classes.fadeIn : classes.fadeOut}>
+    <div>
       <div className={classes["label-row"]}>
         <Label name={"Empty"} />
         <Label name={"Start"} />

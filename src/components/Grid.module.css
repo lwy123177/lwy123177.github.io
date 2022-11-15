@@ -53,19 +53,27 @@
 .label-col {
   margin-right: 5px;
 }
-.fadeOut {
-  opacity: 0;
-  width: 0;
-  height: 0;
-  transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
-}
-.fadeIn {
-  opacity: 1;
-  width: auto;
-  height: auto;
-  transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
-}
 .hint {
   font-size: 15px;
   color: #666666;
+}
+.bump {
+  animation: bump 1000ms ease-in-out;
+}
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(0.9);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
