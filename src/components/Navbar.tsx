@@ -1,12 +1,15 @@
-import { AppBar, Toolbar, Button, Typography } from "@mui/material";
+import { AppBar, Toolbar, Button } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import classes from "./Navbar.module.css";
 import HomeIcon from "@mui/icons-material/Home";
+import { GridContext } from "../store/GridContext";
 
 const Navbar = () => {
   const location = useLocation();
   const [path, setPath] = useState<string>();
+  const gridContext = useContext(GridContext);
+  const isDrawing = gridContext.state === "Drawing";
   useEffect(() => {
     setPath(location.pathname);
   }, [location]);
@@ -14,13 +17,16 @@ const Navbar = () => {
   return (
     <AppBar position="static" color="secondary">
       <Toolbar variant="dense">
-        <div className={classes.tab}>
-          <Link to="/">
+        <div className={`${classes.tab} ${isDrawing ? classes.inactive : ""}`}>
+          <Link to={isDrawing ? "#" : "/"}>
             <HomeIcon color={path === "/" ? "warning" : "primary"} />
           </Link>
         </div>
-        <div className={classes.tab}>
-          <Link to="/bfs" style={{ textDecoration: "none" }}>
+        <div className={`${classes.tab} ${isDrawing ? classes.inactive : ""}`}>
+          <Link
+            to={isDrawing ? "#" : "/bfs"}
+            style={{ textDecoration: "none" }}
+          >
             <Button
               color={path === "/bfs" ? "warning" : "primary"}
               className={classes.tab}
@@ -30,8 +36,11 @@ const Navbar = () => {
             </Button>
           </Link>
         </div>
-        <div className={classes.tab}>
-          <Link to="/dfs" style={{ textDecoration: "none" }}>
+        <div className={`${classes.tab} ${isDrawing ? classes.inactive : ""}`}>
+          <Link
+            to={isDrawing ? "#" : "/dfs"}
+            style={{ textDecoration: "none" }}
+          >
             <Button
               color={path === "/dfs" ? "warning" : "primary"}
               className={classes.tab}

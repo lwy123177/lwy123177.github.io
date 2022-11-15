@@ -6,3 +6,6 @@
 .tab:hover {
   transform: scale(1.15);
 }
+.tab.inactive {
+  opacity: 30%;
+}
