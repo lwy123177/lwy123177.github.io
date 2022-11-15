@@ -101,6 +101,7 @@ const Grid: React.FC<{
       <div className={classes["label-row"]}>
         <Label name={"Obstacle"} />
         <Label name={"Empty"} />
+        <Label name={"Start"} />
         <Label name={"Current"} />
         <Label name={"Destination"} />
         <Label name={"Visited"} />

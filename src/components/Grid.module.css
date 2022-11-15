@@ -16,11 +16,11 @@
   border: 1px solid #666666;
   transition: all 0.2s ease-in-out;
 }
-.div-table-col.start:hover,
-.div-table-col.destination:hover {
+.div-table .div-table-col.start:hover,
+.div-table .div-table-col.destination:hover {
   transform: scale(2);
 }
-.div-table-col.empty:hover {
+.div-table .div-table-col.empty:hover {
   transform: scale(1.2);
 }
 .empty {
@@ -32,7 +32,9 @@
 .obstacle {
   background-color: darkmagenta;
 }
-.current,
+.current {
+  background-color: lightseagreen;
+}
 .start {
   background-color: lightsalmon;
 }
