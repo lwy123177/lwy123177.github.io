@@ -52,18 +52,7 @@ const Bfs = () => {
           break;
         }
         gridContext.markCell(popped[0], popped[1], "current");
-        for (let di = 0; di < 4; di++) {
-          const dr = popped[0] + dirs[di][0],
-            dc = popped[1] + dirs[di][1];
-          if (
-            !gridContext.out(dr, dc) &&
-            !vis.has(encode(dr, dc)) &&
-            gridContext.grid[dr][dc] !== "obstacle"
-          ) {
-            gridContext.markCell(dr, dc, "exploring");
-            parent[encode(dr, dc)] = encode(popped[0], popped[1]);
-          }
-        }
+        await delay(getAnimationDelay());
         for (let di = 0; di < 4; di++) {
           let dr = popped[0] + dirs[di][0],
             dc = popped[1] + dirs[di][1];
@@ -74,8 +63,9 @@ const Bfs = () => {
           ) {
             vis.add(encode(dr, dc));
             queue.push([dr, dc]);
+            gridContext.markCell(dr, dc, "exploring");
+            parent[encode(dr, dc)] = encode(popped[0], popped[1]);
           }
-          await delay(getAnimationDelay());
         }
         gridContext.markCell(popped[0], popped[1], "visited");
       }
