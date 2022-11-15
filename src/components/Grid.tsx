@@ -105,6 +105,7 @@ const Grid: React.FC<{
         <Label name={"Current"} />
         <Label name={"Destination"} />
         <Label name={"Visited"} />
+        <Label name={"Exploring"} />
       </div>
       {getInstruction(gridContext.state)}
       <div

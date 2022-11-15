@@ -41,6 +41,9 @@
 .destination {
   background-color: greenyellow;
 }
+.exploring {
+  background-color: aqua;
+}
 .label-row {
   display: flex;
 }
