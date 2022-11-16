@@ -1,6 +1,7 @@
 import Grid from "./Grid";
 import { useContext, useRef } from "react";
 import { GridContext } from "../store/GridContext";
+import { MinHeap } from "../util/MinHeap";
 import classes from "./AStar.module.css";
 import utils from "../util/Util.module.css";
 
@@ -39,6 +40,14 @@ const AStar = () => {
       }
     }
     // TODO: Implement A* on grid from [startR, startC] to [destR, destC]
+    let minHeap = new MinHeap();
+    minHeap.add(10);
+    minHeap.add(8);
+    minHeap.add(9);
+
+    while (minHeap.count > 0) {
+      console.log(minHeap.extractMin());
+    }
 
     // Finish Searching
     gridContext.setState("FinishedDrawing");
