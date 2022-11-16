@@ -40,21 +40,13 @@ const AStar = () => {
       }
     }
     // TODO: Implement A* on grid from [startR, startC] to [destR, destC]
-    let minHeap = new MinHeap();
-    minHeap.add(10);
-    minHeap.add(8);
-    minHeap.add(9);
-
-    while (minHeap.count > 0) {
-      console.log(minHeap.extractMin());
-    }
 
     // Finish Searching
     gridContext.setState("FinishedDrawing");
   };
   return (
     <div className={classes["astar-page"]}>
-      <h2>A-Star Algorithm</h2>
+      <h2>A* Algorithm</h2>
       <div className={gridContext.state === "Drawing" ? utils.blink : ""}>
         Animation Speed <input type="range" min="1" max="499" ref={speedRef} />
       </div>
