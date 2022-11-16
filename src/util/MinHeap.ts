@@ -1,11 +1,11 @@
 // source: https://www.codeguru.co.in/2021/05/binary-heap-min-and-max-heap-using.html
-export class MinHeap {
-  private items: Array<number>;
+export class MinHeap<T> {
+  private items: Array<T>;
   public count = 0;
   constructor() {
     this.items = [];
   }
-  public add(item: number) {
+  public add(item: T) {
     this.count++;
     this.items.push(item);
     this.heapifyUp(this.items.length - 1);
@@ -61,7 +61,7 @@ export class MinHeap {
     }
     return undefined;
   }
-  private swap(arr: Array<number>, i: number, j: number) {
+  private swap(arr: Array<T>, i: number, j: number) {
     let temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
