@@ -15,7 +15,6 @@ export class MinHeap<T> {
       this.heapifyDown(0);
       return item;
     }
-    return Infinity;
   };
   private heapifyUp(index: number) {
     let parent = this.parent(index);
