@@ -2,7 +2,6 @@ import Grid from "./Grid";
 import { useContext, useRef } from "react";
 import { GridContext } from "../store/GridContext";
 import classes from "./Bfs.module.css";
-import utils from "../util/Util.module.css";
 
 const Bfs = () => {
   const gridContext = useContext(GridContext);

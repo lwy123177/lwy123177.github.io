@@ -3,7 +3,6 @@ import { useContext, useRef } from "react";
 import { GridContext } from "../store/GridContext";
 import { MinHeap } from "../util/MinHeap";
 import classes from "./AStar.module.css";
-import utils from "../util/Util.module.css";
 
 const AStar = () => {
   const gridContext = useContext(GridContext);
@@ -12,7 +11,6 @@ const AStar = () => {
     return new Promise((resolve) => setTimeout(resolve, delayInms));
   };
   const getAnimationDelay = () => 500 - parseInt(speedRef.current!.value);
-  const encode = (row: number, col: number) => row + "," + col;
   const search = async () => {
     // Start Searching
     gridContext.setState("Drawing");
@@ -53,9 +51,9 @@ const AStar = () => {
     openSet.add([heuristic(startR, startC), startR, startC]);
     gScore[encode(startR, startC)] = 0;
     while (openSet.count > 0) {
-      const [_, r, c] = openSet.extractMin()!;
+      const [, r, c] = openSet.extractMin()!;
       const current = encode(r, c);
-      if (r == destR && c == destC) {
+      if (r === destR && c === destC) {
         found = true;
         break;
       }

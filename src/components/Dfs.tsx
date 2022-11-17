@@ -2,7 +2,6 @@ import Grid from "./Grid";
 import { useContext, useRef } from "react";
 import { GridContext } from "../store/GridContext";
 import classes from "./Dfs.module.css";
-import utils from "../util/Util.module.css";
 
 const Dfs = () => {
   const gridContext = useContext(GridContext);
