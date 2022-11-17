@@ -37,7 +37,6 @@ const AStar = () => {
         }
       }
     }
-    // TODO: Implement A* on grid from [startR, startC] to [destR, destC]
     const encode = (row: number, col: number) => row + "," + col;
     const gScore: Record<string, number> = {};
     const confirmed = new Set<string>();
@@ -72,6 +71,7 @@ const AStar = () => {
           if (gScore[neighbor] === undefined || tempG < gScore[neighbor]) {
             cameFrom[neighbor] = current;
             gScore[neighbor] = tempG;
+            gridContext.markCell(nr, nc, "exploring");
             openSet.add([tempG + heuristic(nr, nc), nr, nc]);
           }
         }
