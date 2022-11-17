@@ -31,6 +31,11 @@ const Grid: React.FC<{
 }> = (props) => {
   const gridContext = useContext(GridContext);
   const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
+  const [second, setSecond] = useState<number>(0);
+  const [milliSecond, setMilliSecond] = useState<number>(0);
+  const display = (sec: number) => (sec >= 10 ? "" + sec : "0" + sec);
+  const secondToDisplay = display(second);
+  const milliSecondToDisplay = display(milliSecond);
   const handleDrawAgain = () => {
     for (let r = 0; r < gridContext.grid.length; r++) {
       for (let c = 0; c < gridContext.grid[0].length; c++) {
@@ -109,9 +114,19 @@ const Grid: React.FC<{
   };
   return (
     <div>
-      <div className={gridContext.state === "Drawing" ? utils.blink : ""}>
-        Animation Speed{" "}
-        <input type="range" min="1" max="499" ref={props.speedRef} />
+      <div className={classes["label-row"]}>
+        <div className={gridContext.state === "Drawing" ? utils.blink : ""}>
+          Animation Speed{" "}
+          <input type="range" min="1" max="499" ref={props.speedRef} />
+        </div>
+        <div className={classes.time}>
+          Time Elapsed:{" "}
+          <label>
+            <label>{secondToDisplay}</label>.
+            <label>{milliSecondToDisplay}</label>
+          </label>{" "}
+          seconds
+        </div>
       </div>
       <div className={classes["label-row"]}>
         <Label name={"Empty"} />

@@ -57,6 +57,12 @@
   font-size: 15px;
   color: #666666;
 }
+.time {
+  margin-left: 20px;
+}
+.time label {
+  color: grey;
+}
 .bump {
   animation: bump 1000ms ease-in-out;
 }
