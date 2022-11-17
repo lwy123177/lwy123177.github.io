@@ -40,7 +40,59 @@ const AStar = () => {
       }
     }
     // TODO: Implement A* on grid from [startR, startC] to [destR, destC]
+    const encode = (row: number, col: number) => row + "," + col;
+    const gScore: Record<string, number> = {};
+    const confirmed = new Set<string>();
+    const cameFrom: Record<string, string> = {};
+    const heuristic = (row: number, col: number) => {
+      return Math.abs(row - destR) + Math.abs(col - destC);
+    };
+    const openSet = new MinHeap<[number, number, number]>();
 
+    let found = false;
+    openSet.add([heuristic(startR, startC), startR, startC]);
+    gScore[encode(startR, startC)] = 0;
+    while (openSet.count > 0) {
+      const [_, r, c] = openSet.extractMin()!;
+      const current = encode(r, c);
+      if (r == destR && c == destC) {
+        found = true;
+        break;
+      }
+      if (confirmed.has(current)) continue;
+      confirmed.add(current);
+      gridContext.markCell(r, c, "current");
+      await delay(getAnimationDelay());
+      for (let i = 0; i < 4; i++) {
+        const nr = r + dirs[i][0],
+          nc = c + dirs[i][1];
+        const out =
+          nr < 0 || nc < 0 || nr >= grid.length || nc >= grid[0].length;
+        if (!out && grid[nr][nc] !== "obstacle") {
+          const neighbor = encode(nr, nc);
+          const tempG = gScore[current] + 1;
+          if (gScore[neighbor] === undefined || tempG < gScore[neighbor]) {
+            cameFrom[neighbor] = current;
+            gScore[neighbor] = tempG;
+            openSet.add([tempG + heuristic(nr, nc), nr, nc]);
+          }
+        }
+      }
+      gridContext.markCell(r, c, "visited");
+    }
+    if (found) {
+      let cells: [number, number][] = [];
+      let now = encode(destR, destC);
+      while (now && cameFrom[now]) {
+        let points = now.split(",").map((x) => parseInt(x));
+        cells.push([points[0], points[1]]);
+        now = cameFrom[now];
+      }
+      for (let i = cells.length - 1; i >= 1; i--) {
+        gridContext.markCell(cells[i][0], cells[i][1], "path");
+        await delay(getAnimationDelay());
+      }
+    }
     // Finish Searching
     gridContext.setState("FinishedDrawing");
   };
