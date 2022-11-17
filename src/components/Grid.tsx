@@ -1,4 +1,5 @@
 import classes from "./Grid.module.css";
+import utils from "../util/Util.module.css";
 import React, { useContext, useState } from "react";
 import { GridContext } from "../store/GridContext";
 import { Button } from "@mui/material";
@@ -26,6 +27,7 @@ const Label: React.FC<{ name: string }> = (props) => {
 
 const Grid: React.FC<{
   search: () => void;
+  speedRef: React.RefObject<HTMLInputElement>;
 }> = (props) => {
   const gridContext = useContext(GridContext);
   const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
@@ -107,6 +109,10 @@ const Grid: React.FC<{
   };
   return (
     <div>
+      <div className={gridContext.state === "Drawing" ? utils.blink : ""}>
+        Animation Speed{" "}
+        <input type="range" min="1" max="499" ref={props.speedRef} />
+      </div>
       <div className={classes["label-row"]}>
         <Label name={"Empty"} />
         <Label name={"Start"} />

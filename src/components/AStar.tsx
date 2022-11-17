@@ -99,10 +99,7 @@ const AStar = () => {
   return (
     <div className={classes["astar-page"]}>
       <h2>A* Algorithm</h2>
-      <div className={gridContext.state === "Drawing" ? utils.blink : ""}>
-        Animation Speed <input type="range" min="1" max="499" ref={speedRef} />
-      </div>
-      <Grid search={search} />
+      <Grid search={search} speedRef={speedRef} />
     </div>
   );
 };
