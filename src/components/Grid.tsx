@@ -117,7 +117,13 @@ const Grid: React.FC<{
       <div className={classes["label-row"]}>
         <div className={gridContext.state === "Drawing" ? utils.blink : ""}>
           Animation Speed{" "}
-          <input type="range" min="1" max="499" ref={props.speedRef} />
+          <input
+            type="range"
+            min="1"
+            max="499"
+            defaultValue={"499"}
+            ref={props.speedRef}
+          />
         </div>
         <div className={classes.time}>
           Time Elapsed:{" "}
