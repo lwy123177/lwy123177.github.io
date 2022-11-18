@@ -1,10 +1,4 @@
 export default `    Pseudocode: 
-    function reconstruct_path(cameFrom, current)
-        total_path := {current}
-        while current in cameFrom.Keys:
-            current := cameFrom[current]
-            total_path.prepend(current)
-        return total_path
 
     function A_Star(start, goal, h)
         openSet := {start}
