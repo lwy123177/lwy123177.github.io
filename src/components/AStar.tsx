@@ -2,7 +2,6 @@ import Grid from "./Grid";
 import { useContext, useRef } from "react";
 import { GridContext } from "../store/GridContext";
 import { MinHeap } from "../util/MinHeap";
-import CodeMirror from "@uiw/react-codemirror";
 import classes from "./AStar.module.css";
 
 const AStar = () => {
@@ -99,7 +98,6 @@ const AStar = () => {
     <div className={classes["astar-page"]}>
       <h2>A* Algorithm</h2>
       <Grid search={search} speedRef={speedRef} />
-      {/* <CodeMirror value="console.log('hello')" /> */}
     </div>
   );
 };

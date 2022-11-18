@@ -4,6 +4,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { GridContext } from "../store/GridContext";
 import { Button } from "@mui/material";
 import { State } from "../store/GridContext";
+import CodeBlock from "./CodeBlock";
+import AStarCode from "../algorithm/AStarCode";
 
 const Label: React.FC<{ name: string }> = (props) => {
   const gridContext = useContext(GridContext);
@@ -163,28 +165,33 @@ const Grid: React.FC<{
         <Label name={"Exploring"} />
       </div>
       {getInstruction(gridContext.state)}
-      <div
-        className={classes["div-table"]}
-        onMouseDown={() => setIsMouseDown(true)}
-        onMouseUp={() => setIsMouseDown(false)}
-      >
-        {gridContext.grid.map((row, rowIndex) => (
-          <div key={"row_" + rowIndex} className={classes["div-table-row"]}>
-            {row.map((cell, colIndex) => (
-              <div
-                key={"cell_" + rowIndex + "," + colIndex}
-                className={`${classes["div-table-col"]} ${classes[cell]} ${
-                  cell === "path" && gridContext.state === "FinishedDrawing"
-                    ? classes["bump-path"]
-                    : ""
-                }`}
-                onClick={() => cellClickHandler(rowIndex, colIndex)}
-                onMouseOver={() => cellOverHandler(rowIndex, colIndex)}
-                onMouseDown={() => cellDownHandler(rowIndex, colIndex)}
-              />
-            ))}
-          </div>
-        ))}
+      <div className={utils["flex-container"]}>
+        <div
+          className={`${classes["div-table"]} ${utils["flex-child"]}`}
+          onMouseDown={() => setIsMouseDown(true)}
+          onMouseUp={() => setIsMouseDown(false)}
+        >
+          {gridContext.grid.map((row, rowIndex) => (
+            <div key={"row_" + rowIndex} className={classes["div-table-row"]}>
+              {row.map((cell, colIndex) => (
+                <div
+                  key={"cell_" + rowIndex + "," + colIndex}
+                  className={`${classes["div-table-col"]} ${classes[cell]} ${
+                    cell === "path" && gridContext.state === "FinishedDrawing"
+                      ? classes["bump-path"]
+                      : ""
+                  }`}
+                  onClick={() => cellClickHandler(rowIndex, colIndex)}
+                  onMouseOver={() => cellOverHandler(rowIndex, colIndex)}
+                  onMouseDown={() => cellDownHandler(rowIndex, colIndex)}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+        <div>
+          <CodeBlock value={AStarCode} />
+        </div>
       </div>
     </div>
   );
