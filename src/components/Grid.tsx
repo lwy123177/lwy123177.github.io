@@ -1,6 +1,6 @@
 import classes from "./Grid.module.css";
 import utils from "../util/Util.module.css";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { GridContext } from "../store/GridContext";
 import { Button } from "@mui/material";
 import { State } from "../store/GridContext";
@@ -112,6 +112,25 @@ const Grid: React.FC<{
     if (gridContext.state !== "Obstacle") return;
     gridContext.markCell(row, col, gridContext.state.toLowerCase());
   };
+  let startDrawingTime = new Date().getTime();
+  useEffect(() => {
+    if (gridContext.state === "Drawing") {
+      startDrawingTime = new Date().getTime();
+      setSecond(0);
+      setMilliSecond(0);
+      const interval = setInterval(() => {
+        const now = new Date().getTime();
+        const milliSecondsPassed = now - startDrawingTime;
+        const secondsPassed = Math.floor(milliSecondsPassed / 1000);
+        let mil = milliSecondsPassed - secondsPassed * 1000;
+        while (mil >= 100) mil /= 10;
+        mil = Math.floor(mil);
+        setSecond(secondsPassed);
+        setMilliSecond(mil);
+      }, 200);
+      return () => clearInterval(interval);
+    }
+  }, [gridContext.state]);
   return (
     <div>
       <div className={classes["label-row"]}>
