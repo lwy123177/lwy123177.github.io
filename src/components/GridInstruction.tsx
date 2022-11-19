@@ -1,4 +1,3 @@
-import { State } from "../store/GridContext";
 import { Button } from "@mui/material";
 import classes from "./Grid.module.css";
 import { useContext } from "react";
