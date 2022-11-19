@@ -97,22 +97,21 @@ const Grid: React.FC<{
   };
   let startDrawingTime = new Date().getTime();
   useEffect(() => {
-    if (gridContext.state === "Drawing") {
-      startDrawingTime = new Date().getTime();
-      setSecond(0);
-      setMilliSecond(0);
-      const interval = setInterval(() => {
-        const now = new Date().getTime();
-        const milliSecondsPassed = now - startDrawingTime;
-        const secondsPassed = Math.floor(milliSecondsPassed / 1000);
-        let mil = milliSecondsPassed - secondsPassed * 1000;
-        while (mil >= 100) mil /= 10;
-        mil = Math.floor(mil);
-        setSecond(secondsPassed);
-        setMilliSecond(mil);
-      }, 200);
-      return () => clearInterval(interval);
-    }
+    if (gridContext.state !== "Drawing") return;
+    startDrawingTime = new Date().getTime();
+    setSecond(0);
+    setMilliSecond(0);
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const milliSecondsPassed = now - startDrawingTime;
+      const secondsPassed = Math.floor(milliSecondsPassed / 1000);
+      let mil = milliSecondsPassed - secondsPassed * 1000;
+      while (mil >= 100) mil /= 10;
+      mil = Math.floor(mil);
+      setSecond(secondsPassed);
+      setMilliSecond(mil);
+    }, 200);
+    return () => clearInterval(interval);
   }, [gridContext.state]);
   return (
     <div>
