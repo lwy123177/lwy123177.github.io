@@ -3,6 +3,7 @@ import { useContext, useRef } from "react";
 import { GridContext } from "../store/GridContext";
 import { MinHeap } from "../util/MinHeap";
 import classes from "./AStar.module.css";
+import AStarCode from "../algorithm/AStarCode";
 
 const AStar = () => {
   const gridContext = useContext(GridContext);
@@ -97,7 +98,7 @@ const AStar = () => {
   return (
     <div className={classes["astar-page"]}>
       <h2>A* Algorithm</h2>
-      <Grid search={search} speedRef={speedRef} />
+      <Grid search={search} speedRef={speedRef} pseudocode={AStarCode} />
     </div>
   );
 };

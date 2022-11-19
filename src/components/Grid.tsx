@@ -5,7 +5,6 @@ import { GridContext } from "../store/GridContext";
 import { Button } from "@mui/material";
 import { State } from "../store/GridContext";
 import CodeBlock from "./CodeBlock";
-import AStarCode from "../algorithm/AStarCode";
 
 const Label: React.FC<{ name: string }> = (props) => {
   const gridContext = useContext(GridContext);
@@ -30,6 +29,7 @@ const Label: React.FC<{ name: string }> = (props) => {
 const Grid: React.FC<{
   search: () => void;
   speedRef: React.RefObject<HTMLInputElement>;
+  pseudocode: string;
 }> = (props) => {
   const gridContext = useContext(GridContext);
   const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
@@ -190,7 +190,7 @@ const Grid: React.FC<{
           ))}
         </div>
         <div>
-          <CodeBlock value={AStarCode} />
+          <CodeBlock value={props.pseudocode} />
         </div>
       </div>
     </div>

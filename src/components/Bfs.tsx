@@ -2,6 +2,7 @@ import Grid from "./Grid";
 import { useContext, useRef } from "react";
 import { GridContext } from "../store/GridContext";
 import classes from "./Bfs.module.css";
+import BFSCode from "../algorithm/BFSCode";
 
 const Bfs = () => {
   const gridContext = useContext(GridContext);
@@ -89,7 +90,7 @@ const Bfs = () => {
   return (
     <div className={classes["bfs-page"]}>
       <h2>Breadth-first Search (BFS)</h2>
-      <Grid search={search} speedRef={speedRef} />
+      <Grid search={search} speedRef={speedRef} pseudocode={BFSCode} />
     </div>
   );
 };

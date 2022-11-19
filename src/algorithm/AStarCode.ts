@@ -1,4 +1,4 @@
-export default `    Pseudocode: 
+export default `
 
     function A_Star(start, goal, h)
         openSet := {start}
@@ -10,7 +10,7 @@ export default `    Pseudocode:
         while openSet is not empty
             current := the node in openSet having the lowest fScore[] value
             if current = goal
-                return reconstruct_path(cameFrom, current)
+                return Found
 
             openSet.Remove(current)
             for each neighbor of current
@@ -23,4 +23,4 @@ export default `    Pseudocode:
                         openSet.add(neighbor)
 
         // Open set is empty but goal was never reached
-        return failure`
+        return Not Found`
