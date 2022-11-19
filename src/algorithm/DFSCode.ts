@@ -1,7 +1,7 @@
 export default `
 
     function DFS(start, goal)
-        openSet := {start}
+        openSet := {start} // it's a stack
         visitedSet := {start}
 
         while openSet is not empty

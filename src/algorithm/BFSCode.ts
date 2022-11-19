@@ -1,13 +1,13 @@
 export default `
 
     function BFS(start, goal)
-        openSet := {start}
+        openSet := {start} // it's a queue
         visitedSet := {start}
 
         while openSet is not empty
             size = size of openSet
             repeat size times:
-              current := the node in openSet at the top of the stack
+              current := the node in openSet at the front of the queue
               if current = goal
                   return Found
 

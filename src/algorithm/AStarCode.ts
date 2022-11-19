@@ -1,7 +1,7 @@
 export default `
 
     function A_Star(start, goal, h)
-        openSet := {start}
+        openSet := {start} // it's a min-heap
         gScore := map with default value of Infinity
         gScore[start] := 0
         fScore := map with default value of Infinity
