@@ -2,8 +2,7 @@ import classes from "./Grid.module.css";
 import utils from "../util/Util.module.css";
 import React, { useContext, useState, useEffect } from "react";
 import { GridContext } from "../store/GridContext";
-import { Button } from "@mui/material";
-import { State } from "../store/GridContext";
+import GridInstruction from "./GridInstruction";
 import CodeBlock from "./CodeBlock";
 import GridLabel from "./GridLabel";
 
@@ -41,37 +40,6 @@ const Grid: React.FC<{
       }
     }
     gridContext.setState("Start");
-  };
-  const getInstruction = (state: State) => {
-    if (state === "Start") return <h5>Please select a starting position</h5>;
-    if (state === "Destination") return <h5>Please select a destination</h5>;
-    if (state === "Obstacle")
-      return (
-        <div className={classes["label-row"]}>
-          <h5>
-            Please select obstacle(s){" "}
-            <label className={classes.hint}>(Ctrl-Z to undo)</label>
-          </h5>
-          <Button variant="outlined" onClick={props.search}>
-            Draw!
-          </Button>
-        </div>
-      );
-    if (state === "Drawing") {
-      return <h5>Finding the path...</h5>;
-    }
-    if (state === "FinishedDrawing")
-      return (
-        <div className={classes["label-row"]}>
-          <h5>Done:</h5>
-          <Button variant="outlined" onClick={handleDrawAgain}>
-            Draw Again
-          </Button>
-          <Button variant="outlined" onClick={handleRestart}>
-            Restart
-          </Button>
-        </div>
-      );
   };
   const cellClickHandler = (row: number, col: number) => {
     let success = gridContext.markCell(
@@ -144,7 +112,11 @@ const Grid: React.FC<{
         <GridLabel name={"Visited"} />
         <GridLabel name={"Exploring"} />
       </div>
-      {getInstruction(gridContext.state)}
+      <GridInstruction
+        search={props.search}
+        handleDrawAgain={handleDrawAgain}
+        handleRestart={handleRestart}
+      />
       <div className={utils["flex-container"]}>
         <div
           className={`${classes["div-table"]} ${utils["flex-child"]}`}
