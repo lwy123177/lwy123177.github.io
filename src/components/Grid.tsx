@@ -5,26 +5,7 @@ import { GridContext } from "../store/GridContext";
 import { Button } from "@mui/material";
 import { State } from "../store/GridContext";
 import CodeBlock from "./CodeBlock";
-
-const Label: React.FC<{ name: string }> = (props) => {
-  const gridContext = useContext(GridContext);
-  return (
-    <div
-      className={
-        props.name.toLowerCase() === gridContext.state.toLowerCase()
-          ? classes.bump
-          : ""
-      }
-    >
-      <div
-        className={`${classes["div-table-col"]} 
-        ${classes[props.name.toLowerCase()]}
-        `}
-      />
-      <label className={classes["label-col"]}>{props.name}</label>
-    </div>
-  );
-};
+import GridLabel from "./GridLabel";
 
 const Grid: React.FC<{
   search: () => void;
@@ -156,13 +137,13 @@ const Grid: React.FC<{
         </div>
       </div>
       <div className={classes["label-row"]}>
-        <Label name={"Empty"} />
-        <Label name={"Start"} />
-        <Label name={"Destination"} />
-        <Label name={"Obstacle"} />
-        <Label name={"Current"} />
-        <Label name={"Visited"} />
-        <Label name={"Exploring"} />
+        <GridLabel name={"Empty"} />
+        <GridLabel name={"Start"} />
+        <GridLabel name={"Destination"} />
+        <GridLabel name={"Obstacle"} />
+        <GridLabel name={"Current"} />
+        <GridLabel name={"Visited"} />
+        <GridLabel name={"Exploring"} />
       </div>
       {getInstruction(gridContext.state)}
       <div className={utils["flex-container"]}>
