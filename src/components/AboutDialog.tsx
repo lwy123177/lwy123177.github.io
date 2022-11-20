@@ -27,7 +27,7 @@ const AboutDialog: React.FC<{
           A visualization tool for finding a path from target to destination.
           While the BFS and the A* algorithm can guarantee to find the shortest
           path, the DFS algorithm can only find one that exists(which most
-          likely won't be the shortest)
+          likely won't be the shortest😂)
         </DialogContentText>
       </DialogContent>
       <DialogActions>
