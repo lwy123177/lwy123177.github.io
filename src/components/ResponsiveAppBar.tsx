@@ -14,7 +14,8 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AboutDialog from "./AboutDialog";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { GridContext } from "../store/GridContext";
 
 const pages = ["AStar", "Bfs", "Dfs"];
 const settings = ["About", "Source Code"];
@@ -26,6 +27,8 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState<
     (EventTarget & Element) | null
   >(null);
+  const [openAboutDialog, setOpenAboutDialog] = useState(false);
+  const gridContext = useContext(GridContext);
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.SyntheticEvent) => {
@@ -44,11 +47,10 @@ function ResponsiveAppBar() {
   };
 
   const handleClickNavLink = (page: string) => {
+    gridContext.setHighlightLines([]);
     navigate(page);
     handleCloseNavMenu();
   };
-
-  const [openAboutDialog, setOpenAboutDialog] = useState(false);
 
   const handleClickSetting = (setting: string) => {
     if (setting === "About") {

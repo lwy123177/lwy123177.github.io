@@ -16,6 +16,8 @@ type GridContextObj = {
   state: State;
   setState: (state: State) => void;
   out: (row: number, col: number) => boolean;
+  highlightLines: number[];
+  setHighlightLines: (lines: number[]) => void;
 };
 
 let startGrid: string[][] = [];
@@ -33,6 +35,8 @@ export const GridContext = React.createContext<GridContextObj>({
   state: "Start",
   setState: (state: State) => {},
   out: (row: number, col: number) => true,
+  highlightLines: [],
+  setHighlightLines: (lines: number[]) => {},
 });
 
 export const GridContextProvider: React.FC<{ children: React.ReactNode }> = (
@@ -41,6 +45,7 @@ export const GridContextProvider: React.FC<{ children: React.ReactNode }> = (
   const [grid, setGrid] = useState<string[][]>(startGrid);
   const [state, setState] = useState<State>("Start");
   const [obstacles, setObstacles] = useState<[number, number][]>([]);
+  const [highlightLines, setHighlightLines] = useState<number[]>([]);
   const out = useCallback(
     (row: number, col: number) => {
       return row < 0 || col < 0 || row >= grid.length || col >= grid[0].length;
@@ -82,6 +87,8 @@ export const GridContextProvider: React.FC<{ children: React.ReactNode }> = (
     state: state,
     setState: setState,
     out: out,
+    highlightLines: highlightLines,
+    setHighlightLines: setHighlightLines,
   };
   const keyDownHandler = useCallback(
     (event: KeyboardEvent) => {

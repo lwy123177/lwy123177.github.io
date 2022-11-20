@@ -3,6 +3,7 @@ import { useContext, useRef } from "react";
 import { GridContext } from "../store/GridContext";
 import classes from "../util/Util.module.css";
 import DFSCode from "../algorithm/DFSCode";
+import CreateArray from "../util/CreateArray";
 
 const Dfs = () => {
   const gridContext = useContext(GridContext);
@@ -44,6 +45,11 @@ const Dfs = () => {
     const parent: Record<string, string> = {};
     vis.add(encode(startR, startC));
     let found = false;
+    // Init highlight
+    gridContext.setHighlightLines(CreateArray(2, 3));
+    await delay(1000);
+    // Searching highlight
+    gridContext.setHighlightLines(CreateArray(4, 12));
     while (!found && stack.length > 0) {
       let popped = stack.pop()!;
       gridContext.markCell(popped[0], popped[1], "current");
@@ -89,6 +95,9 @@ const Dfs = () => {
         gridContext.markCell(cells[i][0], cells[i][1], "path");
         await delay(getAnimationDelay());
       }
+      gridContext.setHighlightLines([7]);
+    } else {
+      gridContext.setHighlightLines([14]);
     }
     // Finish Searching
     gridContext.setState("FinishedDrawing");

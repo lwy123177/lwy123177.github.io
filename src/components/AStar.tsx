@@ -4,6 +4,7 @@ import { GridContext } from "../store/GridContext";
 import { MinHeap } from "../util/MinHeap";
 import classes from "../util/Util.module.css";
 import AStarCode from "../algorithm/AStarCode";
+import CreateArray from "../util/CreateArray";
 
 const AStar = () => {
   const gridContext = useContext(GridContext);
@@ -46,10 +47,14 @@ const AStar = () => {
       return Math.abs(row - destR) + Math.abs(col - destC);
     };
     const openSet = new MinHeap<[number, number, number]>();
-
     let found = false;
     openSet.add([heuristic(startR, startC), startR, startC]);
     gScore[encode(startR, startC)] = 0;
+    // Init highlight
+    gridContext.setHighlightLines(CreateArray(2, 6));
+    await delay(1000);
+    // Searching highlight
+    gridContext.setHighlightLines(CreateArray(7, 19));
     while (openSet.count > 0) {
       const [, r, c] = openSet.extractMin()!;
       const current = encode(r, c);
@@ -91,6 +96,9 @@ const AStar = () => {
         gridContext.markCell(cells[i][0], cells[i][1], "path");
         await delay(getAnimationDelay());
       }
+      gridContext.setHighlightLines([10]);
+    } else {
+      gridContext.setHighlightLines([21]);
     }
     // Finish Searching
     gridContext.setState("FinishedDrawing");

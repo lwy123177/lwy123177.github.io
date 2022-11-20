@@ -3,6 +3,7 @@ import { useContext, useRef } from "react";
 import { GridContext } from "../store/GridContext";
 import classes from "../util/Util.module.css";
 import BFSCode from "../algorithm/BFSCode";
+import CreateArray from "../util/CreateArray";
 
 const Bfs = () => {
   const gridContext = useContext(GridContext);
@@ -44,6 +45,11 @@ const Bfs = () => {
     const parent: Record<string, string> = {};
     vis.add(encode(startR, startC));
     let found = false;
+    // Init highlight
+    gridContext.setHighlightLines(CreateArray(2, 3));
+    await delay(1000);
+    // Searching highlight
+    gridContext.setHighlightLines(CreateArray(4, 14));
     while (!found && queue.length > 0) {
       let sz = queue.length;
       for (let i = 0; i < sz; i++) {
@@ -83,6 +89,9 @@ const Bfs = () => {
         gridContext.markCell(cells[i][0], cells[i][1], "path");
         await delay(getAnimationDelay());
       }
+      gridContext.setHighlightLines([9]);
+    } else {
+      gridContext.setHighlightLines([16]);
     }
     // Finish Searching
     gridContext.setState("FinishedDrawing");
