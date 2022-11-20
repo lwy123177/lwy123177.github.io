@@ -47,8 +47,10 @@ function ResponsiveAppBar() {
   };
 
   const handleClickNavLink = (page: string) => {
-    gridContext.setHighlightLines([]);
-    navigate(page);
+    if (gridContext.state !== "Drawing") {
+      gridContext.setHighlightLines([]);
+      navigate(page);
+    }
     handleCloseNavMenu();
   };
 
@@ -113,17 +115,24 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography
-                    textAlign="center"
-                    onClick={() => {
-                      console.log("clicked something");
-                      navigate(page);
-                    }}
-                  >
-                    {page}
-                  </Typography>
-                </MenuItem>
+                <Tooltip
+                  title={
+                    gridContext.state === "Drawing"
+                      ? "Cannot change tab while drawing"
+                      : page
+                  }
+                >
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography
+                      textAlign="center"
+                      onClick={() => {
+                        handleClickNavLink(page);
+                      }}
+                    >
+                      {page}
+                    </Typography>
+                  </MenuItem>
+                </Tooltip>
               ))}
             </Menu>
           </Box>
@@ -148,13 +157,21 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={() => handleClickNavLink(page)}
-                sx={{ my: 2, color: "white", display: "block" }}
+              <Tooltip
+                title={
+                  gridContext.state === "Drawing"
+                    ? "Cannot change tab while drawing"
+                    : page
+                }
               >
-                {page}
-              </Button>
+                <Button
+                  key={page}
+                  onClick={() => handleClickNavLink(page)}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page}
+                </Button>
+              </Tooltip>
             ))}
           </Box>
 
