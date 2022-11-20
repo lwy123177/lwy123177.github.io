@@ -1,7 +1,7 @@
 import Grid from "./Grid";
 import { useContext, useRef } from "react";
 import { GridContext } from "../store/GridContext";
-import classes from "./Bfs.module.css";
+import classes from "../util/Util.module.css";
 import BFSCode from "../algorithm/BFSCode";
 
 const Bfs = () => {
@@ -88,7 +88,7 @@ const Bfs = () => {
     gridContext.setState("FinishedDrawing");
   };
   return (
-    <div className={classes["bfs-page"]}>
+    <div className={classes.page}>
       <h2>Breadth-first Search (BFS)</h2>
       <Grid search={search} speedRef={speedRef} pseudocode={BFSCode} />
     </div>

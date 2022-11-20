@@ -1,7 +1,7 @@
 import Grid from "./Grid";
 import { useContext, useRef } from "react";
 import { GridContext } from "../store/GridContext";
-import classes from "./Dfs.module.css";
+import classes from "../util/Util.module.css";
 import DFSCode from "../algorithm/DFSCode";
 
 const Dfs = () => {
@@ -94,7 +94,7 @@ const Dfs = () => {
     gridContext.setState("FinishedDrawing");
   };
   return (
-    <div className={classes["dfs-page"]}>
+    <div className={classes.page}>
       <h2>Depth-first Search (DFS)</h2>
       <Grid search={search} speedRef={speedRef} pseudocode={DFSCode} />
     </div>

@@ -1,3 +1,13 @@
+@media only screen and (min-width: 1300px) {
+  .page {
+    margin-left: 0px;
+    margin-right: 20px;
+  }
+}
+.page {
+  margin-left: 50px;
+  margin-right: 50px;
+}
 .hidden {
   visibility: hidden;
 }
