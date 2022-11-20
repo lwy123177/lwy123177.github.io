@@ -3,11 +3,13 @@ import Bfs from "./components/Bfs";
 import Dfs from "./components/Dfs";
 import AStar from "./components/AStar";
 import Navbar from "./components/Navbar";
+import ResponsiveAppBar from "./components/ResponsiveAppBar";
 
 const App = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <ResponsiveAppBar />
       <Routes>
         <Route path="/" element={<AStar />} />
         <Route path="/bfs" element={<Bfs />} />
