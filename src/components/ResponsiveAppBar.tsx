@@ -13,7 +13,6 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
-// import { white } from "@mui/material/colors";
 
 const pages = ["AStar", "Bfs", "Dfs"];
 const settings = ["About", "Source Code"];
