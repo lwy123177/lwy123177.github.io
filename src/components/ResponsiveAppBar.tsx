@@ -13,6 +13,8 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
+import AboutDialog from "./AboutDialog";
+import { useState } from "react";
 
 const pages = ["AStar", "Bfs", "Dfs"];
 const settings = ["About", "Source Code"];
@@ -46,8 +48,18 @@ function ResponsiveAppBar() {
     handleCloseNavMenu();
   };
 
+  const [openAboutDialog, setOpenAboutDialog] = useState(false);
+
+  const handleClickSetting = (setting: string) => {
+    if (setting === "About") {
+      setOpenAboutDialog(true);
+    }
+    handleCloseUserMenu();
+  };
+
   return (
     <AppBar position="static">
+      <AboutDialog open={openAboutDialog} setOpen={setOpenAboutDialog} />
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -167,7 +179,12 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => {
+                    handleClickSetting(setting);
+                  }}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
