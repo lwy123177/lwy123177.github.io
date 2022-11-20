@@ -18,14 +18,18 @@ const pages = ["AStar", "Bfs", "Dfs"];
 const settings = ["About", "Source Code"];
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<
+    (EventTarget & Element) | null
+  >(null);
+  const [anchorElUser, setAnchorElUser] = React.useState<
+    (EventTarget & Element) | null
+  >(null);
   const navigate = useNavigate();
 
-  const handleOpenNavMenu = (event: any) => {
+  const handleOpenNavMenu = (event: React.SyntheticEvent) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: any) => {
+  const handleOpenUserMenu = (event: React.SyntheticEvent) => {
     setAnchorElUser(event.currentTarget);
   };
 
