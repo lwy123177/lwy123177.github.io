@@ -117,9 +117,9 @@ const Grid: React.FC<{
         handleDrawAgain={handleDrawAgain}
         handleRestart={handleRestart}
       />
-      <div className={utils["flex-container"]}>
+      <div className={classes["flex-container"]}>
         <div
-          className={`${classes["div-table"]} ${utils["flex-child"]}`}
+          className={`${classes["div-table"]}`}
           onMouseDown={() => setIsMouseDown(true)}
           onMouseUp={() => setIsMouseDown(false)}
         >
