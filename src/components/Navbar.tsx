@@ -2,7 +2,6 @@ import { AppBar, Toolbar, Button } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import classes from "./Navbar.module.css";
-import HomeIcon from "@mui/icons-material/Home";
 import { GridContext } from "../store/GridContext";
 
 const Navbar = () => {
@@ -18,8 +17,17 @@ const Navbar = () => {
     <AppBar position="static" color="secondary">
       <Toolbar variant="dense">
         <div className={`${classes.tab} ${isDrawing ? classes.inactive : ""}`}>
-          <Link to={isDrawing ? "#" : "/"}>
-            <HomeIcon color={path === "/" ? "warning" : "primary"} />
+          <Link
+            to={isDrawing ? "#" : "/astar"}
+            style={{ textDecoration: "none" }}
+          >
+            <Button
+              color={path === "/astar" ? "warning" : "primary"}
+              className={classes.tab}
+              variant={"text"}
+            >
+              A*
+            </Button>
           </Link>
         </div>
         <div className={`${classes.tab} ${isDrawing ? classes.inactive : ""}`}>
@@ -47,20 +55,6 @@ const Navbar = () => {
               variant={"text"}
             >
               DFS
-            </Button>
-          </Link>
-        </div>
-        <div className={`${classes.tab} ${isDrawing ? classes.inactive : ""}`}>
-          <Link
-            to={isDrawing ? "#" : "/astar"}
-            style={{ textDecoration: "none" }}
-          >
-            <Button
-              color={path === "/astar" ? "warning" : "primary"}
-              className={classes.tab}
-              variant={"text"}
-            >
-              A*
             </Button>
           </Link>
         </div>
