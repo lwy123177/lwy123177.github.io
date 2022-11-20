@@ -63,10 +63,9 @@ const Grid: React.FC<{
     if (gridContext.state !== "Obstacle") return;
     gridContext.markCell(row, col, gridContext.state.toLowerCase());
   };
-  let startDrawingTime = new Date().getTime();
   useEffect(() => {
     if (gridContext.state !== "Drawing") return;
-    startDrawingTime = new Date().getTime();
+    const startDrawingTime = new Date().getTime();
     setSecond(0);
     setMilliSecond(0);
     const interval = setInterval(() => {
