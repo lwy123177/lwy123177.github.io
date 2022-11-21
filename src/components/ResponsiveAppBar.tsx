@@ -57,6 +57,12 @@ function ResponsiveAppBar() {
   const handleClickSetting = (setting: string) => {
     if (setting === "About") {
       setOpenAboutDialog(true);
+    } else if (setting === "Source Code") {
+      const url = "https://github.com/lwy123177/lwy123177.github.io";
+      const result = window.open(url, "_blank");
+      if (result) {
+        result.focus();
+      }
     }
     handleCloseUserMenu();
   };
