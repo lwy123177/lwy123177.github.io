@@ -12,6 +12,9 @@
 .keyword {
   color: blueviolet;
 }
+.high-light .keyword {
+  color: pink;
+}
 .line-no {
   color: gray;
 }
