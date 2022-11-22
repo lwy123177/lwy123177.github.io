@@ -122,6 +122,7 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <Tooltip
+                  key={"tool_" + page}
                   title={
                     gridContext.state === "Drawing"
                       ? "Cannot change tab while drawing"
@@ -164,6 +165,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Tooltip
+                key={"tool_" + page}
                 title={
                   gridContext.state === "Drawing"
                     ? "Cannot change tab while drawing"
@@ -171,7 +173,7 @@ function ResponsiveAppBar() {
                 }
               >
                 <Button
-                  key={page}
+                  key={"bnt_" + page}
                   onClick={() => handleClickNavLink(page)}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
