@@ -15,7 +15,7 @@ const CodeBlock: React.FC<{ value: string }> = (props) => {
   let result = "";
   for (let i = 0, lineNo = 1; i < lines.length; i++) {
     if (lines[i].trim().length === 0) continue;
-    let line = lineNo + lines[i];
+    let line = `<span class=${classes["line-no"]}>${lineNo}</span>` + lines[i];
     if (isMobile) {
       line = shrinkIdentation(shrinkIdentation(line));
     }
@@ -25,7 +25,27 @@ const CodeBlock: React.FC<{ value: string }> = (props) => {
     result += line + "\n";
     lineNo++;
   }
-
+  const keywords = [
+    "if",
+    "while",
+    "return",
+    "else",
+    "function",
+    "for",
+    "(",
+    ")",
+    "{",
+    "}",
+    "[",
+    "]",
+  ];
+  for (let i = 0; i < keywords.length; i++) {
+    const keyword = keywords[i];
+    result = result.replaceAll(
+      keyword,
+      `<span class=${classes["keyword"]}>${keyword}</span>`
+    );
+  }
   return (
     <pre
       className={classes["code-block"]}
