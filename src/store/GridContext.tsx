@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 
-const h = 30;
-const w = 30;
+const isMobile = window.innerWidth <= 800;
+const h = isMobile ? 13 : 30;
+const w = isMobile ? 13 : 30;
 
 export type State =
   | "Start"

@@ -94,6 +94,19 @@
     display: flex;
   }
 }
+@media only screen and (max-width: 797px) {
+  .div-table {
+    width: auto;
+  }
+  .div-table-col {
+    width: 20px;
+    height: 20px;
+  }
+  .label-row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
 @keyframes bump-path {
   0% {
     transform: scale(1);
