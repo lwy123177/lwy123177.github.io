@@ -4,6 +4,7 @@ import { GridContext } from "../store/GridContext";
 import classes from "../util/Util.module.css";
 import DFSCode from "../algorithm/DFSCode";
 import CreateArray from "../util/CreateArray";
+import { GetPosRelation } from "../util/GetPosRelation";
 
 const Dfs = () => {
   const gridContext = useContext(GridContext);
@@ -60,12 +61,12 @@ const Dfs = () => {
       }
       let orders = [0, 1, 2, 3];
       // Shuffle the order
-      for (let i = orders.length - 1; i >= 1; i--) {
-        let randIdx = Math.floor(Math.random() * i);
-        let tmp = orders[randIdx];
-        orders[randIdx] = orders[i];
-        orders[i] = tmp;
-      }
+      // for (let i = orders.length - 1; i >= 1; i--) {
+      //   let randIdx = Math.floor(Math.random() * i);
+      //   let tmp = orders[randIdx];
+      //   orders[randIdx] = orders[i];
+      //   orders[i] = tmp;
+      // }
       for (let i = 0; i < orders.length; i++) {
         let di = orders[i];
         let dr = popped[0] + dirs[di][0],
@@ -92,7 +93,11 @@ const Dfs = () => {
         now = parent[now];
       }
       for (let i = cells.length - 1; i >= 1; i--) {
-        gridContext.markCell(cells[i][0], cells[i][1], "path");
+        gridContext.markCell(
+          cells[i][0],
+          cells[i][1],
+          GetPosRelation(cells[i], cells[i - 1])
+        );
         await delay(getAnimationDelay());
       }
       gridContext.setHighlightLines([7]);

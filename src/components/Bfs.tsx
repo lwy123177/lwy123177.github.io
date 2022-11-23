@@ -4,6 +4,7 @@ import { GridContext } from "../store/GridContext";
 import classes from "../util/Util.module.css";
 import BFSCode from "../algorithm/BFSCode";
 import CreateArray from "../util/CreateArray";
+import { GetPosRelation } from "../util/GetPosRelation";
 
 const Bfs = () => {
   const gridContext = useContext(GridContext);
@@ -86,7 +87,11 @@ const Bfs = () => {
         now = parent[now];
       }
       for (let i = cells.length - 1; i >= 1; i--) {
-        gridContext.markCell(cells[i][0], cells[i][1], "path");
+        gridContext.markCell(
+          cells[i][0],
+          cells[i][1],
+          GetPosRelation(cells[i], cells[i - 1])
+        );
         await delay(getAnimationDelay());
       }
       gridContext.setHighlightLines([9]);

@@ -24,7 +24,7 @@ const Grid: React.FC<{
         if (
           gridContext.grid[r][c] === "visited" ||
           gridContext.grid[r][c] === "exploring" ||
-          gridContext.grid[r][c] === "path"
+          gridContext.grid[r][c].startsWith("path")
         ) {
           gridContext.grid[r][c] = "empty";
         }
@@ -127,15 +127,26 @@ const Grid: React.FC<{
               {row.map((cell, colIndex) => (
                 <div
                   key={"cell_" + rowIndex + "," + colIndex}
-                  className={`${classes["div-table-col"]} ${classes[cell]} ${
-                    cell === "path" && gridContext.state === "FinishedDrawing"
+                  className={`${classes["div-table-col"]} ${
+                    classes[cell.startsWith("path") ? "path" : cell]
+                  } ${
+                    cell.startsWith("path") &&
+                    gridContext.state === "FinishedDrawing"
                       ? classes["bump-path"]
                       : ""
                   }`}
                   onClick={() => cellClickHandler(rowIndex, colIndex)}
                   onMouseOver={() => cellOverHandler(rowIndex, colIndex)}
                   onMouseDown={() => cellDownHandler(rowIndex, colIndex)}
-                />
+                >
+                  {cell.startsWith("path") && (
+                    <i
+                      className={`${classes.arrow} ${
+                        classes[cell.split("-")[1]]
+                      }`}
+                    />
+                  )}
+                </div>
               ))}
             </div>
           ))}

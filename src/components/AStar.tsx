@@ -5,6 +5,7 @@ import { MinHeap } from "../util/MinHeap";
 import classes from "../util/Util.module.css";
 import AStarCode from "../algorithm/AStarCode";
 import CreateArray from "../util/CreateArray";
+import { GetPosRelation } from "../util/GetPosRelation";
 
 const AStar = () => {
   const gridContext = useContext(GridContext);
@@ -93,7 +94,11 @@ const AStar = () => {
         now = cameFrom[now];
       }
       for (let i = cells.length - 1; i >= 1; i--) {
-        gridContext.markCell(cells[i][0], cells[i][1], "path");
+        gridContext.markCell(
+          cells[i][0],
+          cells[i][1],
+          GetPosRelation(cells[i], cells[i - 1])
+        );
         await delay(getAnimationDelay());
       }
       gridContext.setHighlightLines([10]);
