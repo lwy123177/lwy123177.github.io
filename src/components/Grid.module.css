@@ -106,7 +106,7 @@
   }
 }
 .bump-path {
-  animation: bump-path 2000ms ease-in-out;
+  animation: bump 2000ms ease-in-out;
 }
 .flex-container {
   display: row;
@@ -127,22 +127,5 @@
   .label-row {
     display: flex;
     flex-wrap: wrap;
-  }
-}
-@keyframes bump-path {
-  0% {
-    transform: scale(1);
-  }
-  10% {
-    transform: scale(0.9);
-  }
-  30% {
-    transform: scale(1.5);
-  }
-  50% {
-    transform: scale(1.65);
-  }
-  100% {
-    transform: scale(1);
   }
 }
