@@ -149,12 +149,13 @@ function ResponsiveAppBar() {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="#"
+            onClick={() => handleClickNavLink("/")}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
+              fontFamily: "roboto",
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
