@@ -20,7 +20,7 @@ import { GridContext } from "../store/GridContext";
 const pages = ["AStar", "Bfs", "Dfs"];
 const settings = ["About", "Source Code"];
 
-function ResponsiveAppBar() {
+const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<
     (EventTarget & Element) | null
   >(null);
@@ -223,5 +223,5 @@ function ResponsiveAppBar() {
       </Container>
     </AppBar>
   );
-}
+};
 export default ResponsiveAppBar;

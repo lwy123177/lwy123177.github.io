@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "@mui/material";
 
-function Copyright() {
+const Copyright = () => {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
@@ -24,7 +24,7 @@ function Copyright() {
       {"."}
     </Typography>
   );
-}
+};
 
 const cards = [1, 2, 3];
 const images = [
@@ -41,7 +41,7 @@ const content = [
 
 const theme = createTheme();
 
-export default function LandPage() {
+const LandPage = () => {
   const pageRedirect = (url: string) => {
     const page = window.open(url, "_blank");
     if (page) page.focus();
@@ -158,4 +158,5 @@ export default function LandPage() {
       {/* End footer */}
     </ThemeProvider>
   );
-}
+};
+export default LandPage;
