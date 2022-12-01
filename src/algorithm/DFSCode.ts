@@ -1,4 +1,4 @@
-export default `
+const code = `
 
     function DFS(start, goal)
         openSet := {start} // it's a stack
@@ -17,3 +17,4 @@ export default `
 
         // Open set is empty but goal was never reached
         return Not Found`
+export default code

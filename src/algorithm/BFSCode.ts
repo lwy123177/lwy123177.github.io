@@ -1,4 +1,4 @@
-export default `
+const code = `
 
     function BFS(start, goal)
         openSet := {start} // it's a queue
@@ -19,3 +19,4 @@ export default `
 
         // Open set is empty but goal was never reached
         return Not Found`
+export default code;

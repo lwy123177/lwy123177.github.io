@@ -1,4 +1,4 @@
-export default `
+const code = `
 
     function A_Star(start, goal, h)
         openSet := {start} // it's a min-heap
@@ -24,3 +24,4 @@ export default `
 
         // Open set is empty but goal was never reached
         return Not Found`
+export default code;
