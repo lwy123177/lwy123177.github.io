@@ -162,7 +162,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            Path Visualizer
+            PathVisual
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
